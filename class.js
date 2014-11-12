@@ -41,24 +41,41 @@
     if (this.change && this.last === 0) {
       switch (this.mesh.position.y) {
       case -100:
-        playerPan(E4, this.direction);
-        E4.start(D5.now() + 0.01);
+        if (this.direction === 1) {
+          //console.log("left" + E4l)
+          E4l.start();
+        } else if (this.direction === 0) {
+          //console.log("right" + E4r)
+          E4r.start();
+        }
         break;
       case -60:
-        playerPan(F4, this.direction);
-        F4.start(D5.now() + 0.01);
+        if (this.direction === 1) {
+          F4l.start();
+        } else if (this.direction === 0) {
+          F4r.start();
+        }
         break;
       case 40:
-        playerPan(B4, this.direction);
-        B4.start(D5.now() + 0.01);
+        if (this.direction === 1) {
+          B4l.start();
+        } else if (this.direction === 0) {
+          B4r.start();
+        }
         break;
       case 80:
-        playerPan(C5, this.direction);
-        C5.start(D5.now() + 0.01);
+        if (this.direction === 1) {
+          C5l.start();
+        } else if (this.direction === 0) {
+          C5r.start();
+        }
         break;
       case 100:
-        playerPan(D5, this.direction);
-        D5.start(D5.now() + 0.01);
+        if (this.direction === 1) {
+          D5l.start();
+        } else if (this.direction === 0) {
+          D5r.start();
+        }
         break;
       }
       this.last++;
@@ -195,7 +212,9 @@
   }
 
   Hit.prototype.play = function () {
-
+    this.notes.forEach(function (note) {
+      note.geometry.verticesNeedUpdate = true;
+    });
   }
 
   exports.Notes = Notes;
