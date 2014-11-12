@@ -1,6 +1,6 @@
 (function (exports) {
   function Note(_x, _y, _z, _direction, _scene) {
-    this.geometry = new THREE.SphereGeometry(10, 16, 16);
+    this.geometry = new THREE.BoxGeometry(10, 16, 16);
     var color;
     switch (_direction) {
     case 0:
@@ -12,8 +12,10 @@
     case 2:
       color = 0xffffff;
     }
-    this.material = new THREE.MeshLambertMaterial({
-      color: color
+    this.material = new THREE.MeshBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.5
     });
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.position.x = _x;
@@ -40,23 +42,23 @@
       switch (this.mesh.position.y) {
       case -100:
         playerPan(E4, this.direction);
-        E4.start();
+        E4.start(D5.now() + 0.01);
         break;
       case -60:
         playerPan(F4, this.direction);
-        F4.start();
+        F4.start(D5.now() + 0.01);
         break;
       case 40:
         playerPan(B4, this.direction);
-        B4.start();
+        B4.start(D5.now() + 0.01);
         break;
       case 80:
         playerPan(C5, this.direction);
-        C5.start();
+        C5.start(D5.now() + 0.01);
         break;
       case 100:
         playerPan(D5, this.direction);
-        D5.start();
+        D5.start(D5.now() + 0.01);
         break;
       }
       this.last++;
@@ -107,7 +109,7 @@
   function Notes(_x, _direction, _scene) {
     this.notes = [];
     this.lines = [];
-    this.melody = [-100, -60, 40, 80, 100, -60, -100, 80, 40, -60, 80];
+    this.melody = [-100, -60, 40, 80, 100, -60, -100, 80, 40, -60, 100, 80];
     this.number = 0;
     this.x = _x;
     this.direction = _direction;
@@ -118,7 +120,7 @@
   Notes.prototype.produce = function () {
     this.notes.push(new Note(this.x, this.melody[this.number], -2600, this.direction, this.scene));
     this.number++;
-    if (this.number > this.melody.length) {
+    if (this.number === this.melody.length) {
       this.number = 0;
     }
     if (this.notes.length > 1) {
@@ -143,6 +145,7 @@
     this.notes.forEach(function (note, index) {
       if (note.mesh.position.z > 390) {
         note.change = true;
+        //note.material.color.setHex(0xfffffff);
       }
     });
   };
@@ -182,13 +185,17 @@
     for (var i = 0; i < 12; i++) {
       this.notes.push(new Note(0, melody[i], 390, 2, _scene));
     }
-    var material = new THREE.LineBasicMaterial({
-      color: 0xffffff
-    });
-    var geometry = new THREE.Geometry();
-    geometry.vertices.push(new THREE.Vector3(0, 500, 390), new THREE.Vector3(0, -500, 390));
-    var mesh = new THREE.Line(geometry, material);
-    _scene.add(mesh);
+    // var material = new THREE.LineBasicMaterial({
+    //   color: 0xffffff
+    // });
+    // var geometry = new THREE.Geometry();
+    // geometry.vertices.push(new THREE.Vector3(0, 500, 390), new THREE.Vector3(0, -500, 390));
+    // var mesh = new THREE.Line(geometry, material);
+    // _scene.add(mesh);
+  }
+
+  Hit.prototype.play = function () {
+
   }
 
   exports.Notes = Notes;

@@ -30,21 +30,29 @@
     // var light = new THREE.AmbientLight(0xffffff); // soft white light
     // scene.add(light);
 
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(0, 1, 0);
-    scene.add(directionalLight);
+    // var directionalLight = new THREE.DirectionalLight(0xaa2222, 0.5);
+    // directionalLight.position.set(0, 0, 0);
+    // scene.add(directionalLight);
 
-    directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(0, 1, 2000);
-    scene.add(directionalLight);
+    // directionalLight = new THREE.DirectionalLight(0x2222aa, 0.5);
+    // directionalLight.position.set(0, 0, 500);
+    // scene.add(directionalLight);
 
-    var light = new THREE.PointLight(0xaa2222, 3, 50000);
-    light.position.set(100, 100, 100);
-    scene.add(light);
+    // // var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    // // directionalLight.position.set(0, 0, 0);
+    // // scene.add(directionalLight);
 
-    light = new THREE.PointLight(0x2222aa, 3, 50000);
-    light.position.set(-100, -100, 1000);
-    scene.add(light);
+    // // directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    // // directionalLight.position.set(0, 0, 600);
+    // // scene.add(directionalLight);
+
+    // var light = new THREE.PointLight(0xffffff, 3, 50000);
+    // light.position.set(100, 100, 100);
+    // scene.add(light);
+
+    // light = new THREE.PointLight(0xffffff, 3, 50000);
+    // light.position.set(-100, -100, 400);
+    // scene.add(light);
 
     // var intensity = 2.5;
     // var distance = 100;
@@ -59,37 +67,37 @@
     // var sphere = new THREE.SphereGeometry(0.25, 16, 8);
 
     // light1 = new THREE.PointLight(c1, intensity, distance);
-    // light1.add(new THREE.Mesh(sphere, new THREE.MeshPhongMaterial({
+    // light1.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
     //   color: c1
     // })));
     // scene.add(light1);
 
     // light2 = new THREE.PointLight(c2, intensity, distance);
-    // light2.add(new THREE.Mesh(sphere, new THREE.MeshPhongMaterial({
+    // light2.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
     //   color: c2
     // })));
     // scene.add(light2);
 
     // light3 = new THREE.PointLight(c3, intensity, distance);
-    // light3.add(new THREE.Mesh(sphere, new THREE.MeshPhongMaterial({
+    // light3.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
     //   color: c3
     // })));
     // scene.add(light3);
 
     // light4 = new THREE.PointLight(c4, intensity, distance);
-    // light4.add(new THREE.Mesh(sphere, new THREE.MeshPhongMaterial({
+    // light4.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
     //   color: c4
     // })));
     // scene.add(light4);
 
     // light5 = new THREE.PointLight(c5, intensity, distance);
-    // light5.add(new THREE.Mesh(sphere, new THREE.MeshPhongMaterial({
+    // light5.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
     //   color: c5
     // })));
     // scene.add(light5);
 
     // light6 = new THREE.PointLight(c6, intensity, distance);
-    // light6.add(new THREE.Mesh(sphere, new THREE.MeshPhongMaterial({
+    // light6.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
     //   color: c6
     // })));
     // scene.add(light6);
@@ -101,7 +109,7 @@
     // Planes
 
     //top wall
-    plane1 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 3000, 5, 15), new THREE.MeshPhongMaterial({
+    plane1 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 3000, 5, 15), new THREE.MeshBasicMaterial({
       color: 0xcccccc,
       wireframe: true
     }));
@@ -111,7 +119,7 @@
     scene.add(plane1);
 
     //left wall
-    plane2 = new THREE.Mesh(new THREE.PlaneGeometry(3000, 1000, 15, 5), new THREE.MeshPhongMaterial({
+    plane2 = new THREE.Mesh(new THREE.PlaneGeometry(3000, 1000, 15, 5), new THREE.MeshBasicMaterial({
       color: 0xcccccc,
       wireframe: true
     }));
@@ -121,7 +129,7 @@
     scene.add(plane2);
 
     //right wall
-    plane3 = new THREE.Mesh(new THREE.PlaneGeometry(3000, 1000, 15, 5), new THREE.MeshPhongMaterial({
+    plane3 = new THREE.Mesh(new THREE.PlaneGeometry(3000, 1000, 15, 5), new THREE.MeshBasicMaterial({
       color: 0xcccccc,
       wireframe: true
     }));
@@ -131,7 +139,7 @@
     scene.add(plane3);
 
     //bottom wall
-    plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 3000, 5, 15), new THREE.MeshPhongMaterial({
+    plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 3000, 5, 15), new THREE.MeshBasicMaterial({
       color: 0xcccccc,
       wireframe: true
     }));
@@ -204,11 +212,12 @@
     // light6.position.x = Math.cos(time * 0.7) * d;
     // light6.position.z = Math.cos(time * 0.5) * d;
 
-    if (frameCount % 10 === 0) {
+    if (frameCount % 8 === 0) {
       leftNotes.produce();
+      rightNotes.produce();
     }
     if (frameCount % 30 === 0) {
-      rightNotes.produce();
+      //rightNotes.produce();
     }
     leftNotes.update();
     leftNotes.hit();
@@ -231,7 +240,7 @@
   videoInput.style.right = '0';
   videoInput.style.zIndex = '100001';
   videoInput.setAttribute('width', '160');
-  videoInput.style.display = 'block';
+  videoInput.style.display = 'none';
 
   // set up camera controller
   headtrackr.controllers.three.realisticAbsoluteCameraControl(camera, 27, [0, 0, 50], new THREE.Vector3(0, 0, 0), {
